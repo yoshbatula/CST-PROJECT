@@ -20,7 +20,7 @@
          <font>
             <Font size="22.0" />
          </font></Button>
-      <Button fx:id="pdaBTN" layoutX="394.0" layoutY="108.0" mnemonicParsing="false" onAction="#Nav" prefHeight="81.0" prefWidth="188.0" style="-fx-background-color: transparent; -fx-border-radius: 20px;" styleClass="navBTN" stylesheets="@../../../css/main.css" text="PDA">
+      <Button fx:id="pdaBTN" layoutX="398.0" layoutY="108.0" mnemonicParsing="false" onAction="#Nav" prefHeight="81.0" prefWidth="188.0" style="-fx-background-color: transparent; -fx-border-radius: 20px;" styleClass="navBTN" stylesheets="@../../../css/main.css" text="PDA">
          <font>
             <Font size="22.0" />
          </font>
