@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="494.0" prefWidth="687.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.cstproject.DFACONT">
+   <children>
+      <AnchorPane prefHeight="206.0" prefWidth="681.0" style="-fx-background-color: D2E0FB;">
+         <children>
+            <Text layoutX="14.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deterministic Finite Automata">
+               <font>
+                  <Font name="Palatino Linotype" size="24.0" />
+               </font>
+            </Text>
+            <Pane layoutX="364.0" layoutY="3.0" prefHeight="200.0" prefWidth="314.0" style="-fx-background-color: white; -fx-background-radius: 20px;">
+               <children>
+                  <TextArea editable="false" prefHeight="200.0" prefWidth="314.0" text="This program simulates a Deterministic Finite Automaton (DFA) that checks whether an input string is accepted based on a set of states, symbols, and transitions provided by the user. First, you input the number of states and symbols, then the symbols themselves. Next, you define the start state and accept (final) states. For each state and symbol, you specify the transition to another state. Once the DFA is set up, you input a string, and the program checks if the string is accepted by following the defined transitions. The DFA accepts the string if it ends in an accept state." wrapText="true" />
+               </children></Pane>
+         </children>
+      </AnchorPane>
+      <Pane layoutX="14.0" layoutY="215.0" prefHeight="258.0" prefWidth="347.0" style="-fx-background-color: D2E0FB; -fx-background-radius: 20px;">
+         <children>
+            <Text layoutX="8.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter number of (Q)states">
+               <font>
+                  <Font name="Palatino Linotype" size="16.0" />
+               </font>
+            </Text>
+            <TextField layoutX="134.0" layoutY="25.0" prefHeight="25.0" prefWidth="190.0" />
+            <Text layoutX="8.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="INPUT STRING">
+               <font>
+                  <Font name="Palatino Linotype" size="16.0" />
+               </font>
+            </Text>
+            <Text layoutX="8.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter set of (Σ)symbols">
+               <font>
+                  <Font name="Palatino Linotype" size="16.0" />
+               </font>
+            </Text>
+            <Text layoutX="10.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter initial (q0)state">
+               <font>
+                  <Font name="Palatino Linotype" size="16.0" />
+               </font>
+            </Text>
+            <Text layoutX="8.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter initial (F)state">
+               <font>
+                  <Font name="Palatino Linotype" size="16.0" />
+               </font>
+            </Text>
+            <TextField layoutX="199.0" layoutY="77.0" prefHeight="25.0" prefWidth="148.0" promptText="e.g &gt; 1" />
+            <TextField layoutX="178.0" layoutY="119.0" prefHeight="25.0" prefWidth="155.0" />
+            <TextField layoutX="169.0" layoutY="155.0" prefHeight="25.0" prefWidth="164.0" />
+            <TextField layoutX="158.0" layoutY="190.0" prefHeight="25.0" prefWidth="164.0" />
+         </children></Pane>
+      <Pane layoutX="367.0" layoutY="215.0" prefHeight="258.0" prefWidth="314.0" style="-fx-background-color: D2E0FB; -fx-background-radius: 20px;">
+         <children>
+            <Text layoutX="14.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RESULT:">
+               <font>
+                  <Font name="Palatino Linotype" size="20.0" />
+               </font>
+            </Text>
+         </children></Pane>
+   </children>
+</AnchorPane>

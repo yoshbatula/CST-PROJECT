@@ -1,0 +1,12 @@
+.body {
+    -fx-background-color: D2E0FB;
+    -fx-arc-height: 406px;
+    -fx-arc-width: 600px;
+}
+
+.navBTN:hover {
+    -fx-background-color-color: #146886;
+    -fx-border-color: white;
+    -fx-border-radius: 0px 0px 0px 3px;
+    -fx-underline: false;
+}
