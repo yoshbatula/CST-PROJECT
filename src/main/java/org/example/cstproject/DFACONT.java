@@ -142,7 +142,7 @@ public class DFACONT extends Application {
             double offsetYTo = Math.sin(toAngle) * radius;
 
             Line line = new Line(startX - offsetXFrom, startY - offsetYFrom, endX + offsetXTo, endY + offsetYTo);
-            line.setStroke(Color.BLUE);
+            line.setStroke(Color.BLACK);
             line.setStrokeWidth(2);
             line.setStrokeLineCap(StrokeLineCap.ROUND);
             line.setUserData(transition); // Set user data for highlighting
@@ -160,9 +160,31 @@ public class DFACONT extends Application {
     private void processInput(String input, Pane pane) {
         clearHighlights(pane); // Clear previous highlights
         dfa.setCurrentState(dfa.getStartState());
+        resultText.setText(""); // Clear previous results
 
-        // Start backtracking
-        backtrack(input, pane, 0); // Use 0 as the starting index
+        // Start processing input with a timeline
+        Timeline timeline = new Timeline();
+        for (int i = 0; i <= input.length(); i++) {
+            final int index = i;
+            KeyFrame keyFrame = new KeyFrame(Duration.seconds(i), e -> {
+                if (index < input.length()) {
+                    char currentChar = input.charAt(index);
+                    State currentState = dfa.getCurrentState();
+                    Transition transition = dfa.getTransition(currentState, currentChar);
+
+                    highlightState(pane, currentState); // Highlight current state
+                    if (transition != null) {
+                        highlightTransition(pane, transition); // Highlight transition
+                        dfa.setCurrentState(transition.toState); // Move to the next state
+                    }
+                } else {
+                    boolean result = dfa.isAccepting(dfa.getCurrentState());
+                    resultText.setText("Input: " + input + " is " + (result ? "accepted" : "rejected"));
+                }
+            });
+            timeline.getKeyFrames().add(keyFrame);
+        }
+        timeline.play(); // Start the timeline
     }
 
     private boolean backtrack(String input, Pane pane, int index) {
@@ -173,9 +195,10 @@ public class DFACONT extends Application {
         if (index == input.length()) {
             // End of input, check acceptance
             boolean result = dfa.isAccepting(dfa.getCurrentState());
-            resultText.setText("Input: " + input + " is " + (result ? "accepted" : "rejected")); // Use result here
+            resultText.setText("Input: " + input + " is " + (result ? "accepted" : "rejected"));
             return result;
         }
+
         char currentChar = input.charAt(index);
         State currentState = dfa.getCurrentState();
         Transition transition = dfa.getTransition(currentState, currentChar);
@@ -194,20 +217,8 @@ public class DFACONT extends Application {
             dfa.setCurrentState(currentState);
         }
 
-        // Explore all transitions from the current state if the direct transition failed
-        for (Transition t : dfa.getTransitionsFromState(currentState)) {
-            highlightTransition(pane, t); // Highlight the alternative transition
-            dfa.setCurrentState(t.toState); // Move to the next state
-
-            if (backtrack(input, pane, index + 1)) { // Process the next character
-                return true; // Accepted
-            }
-
-            // Reset state after backtrack
-            dfa.setCurrentState(currentState);
-        }
-
-        return false; // Not accepted
+        // If there are no valid transitions, return false (not accepted)
+        return false;
     }
 
     private void highlightState(Pane pane, State state) {
@@ -230,10 +241,10 @@ public class DFACONT extends Application {
             if (node instanceof Line) {
                 Line line = (Line) node;
                 if (line.getUserData() instanceof Transition && line.getUserData().equals(transition)) {
-                    line.setStroke(Color.ORANGE); // Highlight current transition
+                    line.setStroke(Color.BLUE); // Highlight current transition
                     line.setStrokeWidth(4);
                 } else {
-                    line.setStroke(Color.BLUE); // Reset other transitions
+                    line.setStroke(Color.BLACK); // Reset other transitions
                     line.setStrokeWidth(2);
                 }
             }
@@ -244,11 +255,11 @@ public class DFACONT extends Application {
         for (Node node : pane.getChildren()) {
             if (node instanceof Circle) {
                 Circle circle = (Circle) node;
-                circle.setStroke(Color.BLACK); // Reset stroke color
+                circle.setStroke(Color.GREEN); // Reset stroke color
                 circle.setStrokeWidth(2); // Reset width
             } else if (node instanceof Line) {
                 Line line = (Line) node;
-                line.setStroke(Color.BLUE); // Reset line color
+                line.setStroke(Color.BLACK); // Reset line color
                 line.setStrokeWidth(2); // Reset line width
             }
         }
